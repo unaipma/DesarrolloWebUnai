@@ -1,18 +1,15 @@
-function persistenciamultiplicativa(num, contador) {
-  const stringNumber = num.toString();
-  let resultado = 1;
-  for (let index = 0; index < stringNumber.length; index++) {
-    resultado = resultado * parseInt(stringNumber[index]);
+function persistenciaMultiplicativa(num) {
+  let contador = 0;
+
+  while (num >= 10) {
+    let producto = 1;
+    for (const digito of num.toString()) {
+      producto *= parseInt(digito);
+    }
+    num = producto;
+    contador++;
   }
-  if (resultado > 9) {
-    persistenciamultiplicativa(resultado, contador);
-  } else {
-    console.log(
-      `la persistencia es ${resultado} y ha necesito ${contador} pasos`
-    );
-    return;
-  }
-  contador++;
+  return contador;
 }
 
 persistenciamultiplicativa(999, 1);

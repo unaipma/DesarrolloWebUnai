@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplos de Inputs</title>
+    <script defer src="main3.js" type="module"></script>
+</head>
+
+<body>
+    <main>
+        <h1>Ejemplos de Inputs</h1>
+
+        <form id="formulario">
+            <label>Número: </label>
+            <input type="number" id="numero" value="0" /><br /><br />
+
+            <label>Texto: </label>
+            <input type="text" id="texto" value="Hola" /><br /><br />
+
+            <label>Correo: </label>
+            <input type="email" id="correo" value="ejemplo@mail.com" /><br /><br />
+
+            <label>Contraseña: </label>
+            <input type="password" id="password" value="1234" /><br /><br />
+
+            <label>Checkbox: </label>
+            <input type="checkbox" id="checkbox" /><br /><br />
+
+            <label>Radio: </label>
+            <input type="radio" name="opcion" value="A" checked /> A
+            <input type="radio" name="opcion" value="B" /> B<br /><br />
+
+            <label>Fecha: </label>
+            <input type="date" id="fecha" /><br /><br />
+
+            <label>Color: </label>
+            <input type="color" id="color" /><br /><br />
+
+            <label>Rango: </label>
+            <input type="range" id="rango" min="0" max="100" value="50" /><br /><br />
+
+            <label>Archivo: </label>
+            <input type="file" id="archivo" /><br /><br />
+
+            <input type="submit" value="Enviar" />
+        </form>
+
+        <h2>Historial de valores:</h2>
+        <div id="historial"></div>
+    </main>
+</body>
+
+</html>

@@ -1,46 +1,122 @@
+/* Basic reset and sizing */
+*{box-sizing: border-box}
 #logo{
-    width: 150px;
-    height: 100px;
+  width: 150px;
+  height: auto;
+  max-height: 100px;
 }
 body{
-  display: grid;
-  width: 100%;
-  height:1000%;
+  margin: 0;
+  padding: 0 1rem;
+  min-height: 100vh;
   text-align: center;
   background-color: rgb(214, 239, 236);
+  font-family: Arial, Helvetica, sans-serif;
+  color: #222;
 }
-img{
-  width:50%;
+.imagenLib{
+  width: 100%;
+  max-width: 480px;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 header{
-  display: flex;
-  flex-direction: row;
-  gap:70%;
-  width: 100%;
-  background-color: lightgray;
-  border-radius: 30px;
-  height: 120px;
-  
+  background-color: rgb(180, 194, 198);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 9px;
 }
+
+.contenido-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.25rem;
+}
+
 .botones{
+  justify-content: center;
+  align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 70%;
-  margin-top: 50px;
-  margin-bottom: 100px;
-  margin-left: 100px;
-  margin-right: 100px;
-  
+  gap: 1.25rem;
+  margin: 2.5rem auto;
+  max-width: 1100px;
+  padding: 0 1rem;
+  flex-wrap: wrap;
 }
 .contenido{
   margin-top: 10px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
 }
 
-.btn{
-  width: 150px;
-  height: 40px;
-  font-size: 20px;
-  border-radius: 90px ;
+.btnCrear,
+.btnConsultar{
+  width: 180px;
+  max-width: 40%;
+  min-width: 140px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 9px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.btnCrear{background-color: rgb(245, 156, 82);} 
+.btnConsultar{background-color: rgb(247, 4, 4);} 
+
+#listalibros{
+  list-style: none;
+  font-size: 1.125rem;
+  text-align: left;
+  margin: 1rem auto;
+  padding-left: 0;
+  max-width: 900px;
+  /* apilar tarjetas en columna centrada */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centrar horizontalmente */
+  gap: 1rem;
+}
+#listalibros li{
+  /* dejar que el contenedor flex gestione el centrado; eliminar márgenes automáticos
+     para que cada li ocupe sólo el espacio necesario junto a su tarjeta */
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+
+@media (max-width: 900px){
+  .contenido-header{flex-direction: column; align-items: center;}
+  .botones{gap: 0.75rem;}
+  .btnCrear, .btnConsultar{width: 100%; max-width: 420px;}
+  #logo{width: 120px}
+}
+
+@media (max-width: 600px){
+  .botones{flex-direction: column; margin-top: 1.5rem;}
+  .contenido{padding: 0 0.5rem}
+  header{padding: 10px}
+  #listalibros{font-size: 1rem}
+}
+
+
+.lib-item{list-style: none; display:flex; flex-direction: column; margin: 0; background: transparent; padding: 0; box-shadow: none;}
+.lib-card{width: 100%; max-width: 360px; border: 1px solid rgba(0,0,0,0.12); border-radius: 6px; overflow: hidden; background: transparent; margin: 0.5rem 0;}
+.lib-card .card-header{background: #e884a8; padding: 0.5rem 0.75rem; font-weight: 600; text-align: center;}
+.lib-card .card-body{background: white; padding: 0.6rem 0.75rem; text-align: left;}
+.lib-card .card-body p{margin: 0.25rem 0; color: #333}
+
+
+@media (max-width: 420px){
+  .lib-card{max-width: 320px}
 }

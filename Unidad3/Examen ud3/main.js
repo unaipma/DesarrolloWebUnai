@@ -1,11 +1,9 @@
 function countGoodPairs(arr) {
   let cont = 0;
   for (let index = 0; index < arr.length; index++) {
-    for (let j = 0; j < arr.length; j++) {
-      if (index != j && index < j) {
-        if (arr[index] == arr[j]) {
-          cont++;
-        }
+    for (let j = index + 1; j < arr.length; j++) { // simplificado
+      if (arr[index] == arr[j]) {
+        cont++;
       }
     }
   }
@@ -13,23 +11,14 @@ function countGoodPairs(arr) {
   return cont;
 }
 
-//countGoodPairs([1, 2, 3, 1, 1, 3]);
-
 const btnSubmit = document.getElementsByClassName("inputSubmit")[0];
 btnSubmit.addEventListener("click", (event) => {
   const texto = document.getElementById("numeros").value;
-  let array = texto.split(",");
-  array.forEach((element) => {
-    if (element == "") {
-    }
-  });
-  //falta meter el metodo con el array split y imprimirlo, no me imprime no se porque
-  countGoodPairs(array.split(","));
+  let array = texto.split(",").filter(e => e !== "").map(Number);
+
+  let resul = countGoodPairs(array);
+
   const p = document.createElement("p");
-  p.innerHTML = `
-    
-    Resultado: ${texto} <br>
-    
-  `;
+  p.textContent = `Input: [${array}] => Output: ${resul}`;
   document.getElementById("historicSection").prepend(p);
 });

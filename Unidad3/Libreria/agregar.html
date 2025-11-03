@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agregar</title>
     <link rel="stylesheet" href="css/style.css" />
-    <script defer src="./js/main.js"></script>
+    <script defer src="./js/agregar.js" type="module"></script>
   </head>
   <body>
     <header>
@@ -16,7 +16,8 @@
         <h3>Librería comercio</h3>
       </div>
     </header>
-    <img src="img/libreria.jpg" alt="libreria" />
+    <div class="contenido">
+    <img src="img/libreria.jpg" alt="libreria" class="imagenLib" />
     <h2>Agregar un libro</h2>
     <form id="formAgregar">
       <label for="titulo">Título:</label><br />
@@ -32,11 +33,12 @@
       <input type="checkbox" id="prestado" name="prestado" /><br /><br />
 
       <input
-        type="button"
+        type="submit"
         id="btnagregarlibro"
-        value="Agregar Libro"
-        class="btn"
+        value="Crear"
+        class="btnCrear"
       />
     </form>
+    </div>
   </body>
 </html>

@@ -1,4 +1,4 @@
-let listalibros = JSON.parse(localStorage.getItem("LIBRERIA")) || [];
+let listalibros = JSON.parse(sessionStorage.getItem("LIBRERIA")) || [];
 import { Libro } from "./model/libroModel.js";
 const btnSubmit = document.getElementById("btnagregarlibro");
 const form = document.getElementById("formAgregar");
@@ -28,5 +28,5 @@ btnSubmit.addEventListener("click", (event) => {
 });
 
 function addStorage(array) {
-  localStorage.setItem("LIBRERIA", JSON.stringify(array));
+  sessionStorage.setItem("LIBRERIA", JSON.stringify(array));
 }

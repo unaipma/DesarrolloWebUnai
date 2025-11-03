@@ -1,4 +1,4 @@
-const listalibros = JSON.parse(localStorage.getItem("LIBRERIA")) || [];
+const listalibros = JSON.parse(sessionStorage.getItem("LIBRERIA")) || [];
 const ul = document.getElementById("listalibros");
 
 function mostrarLibros(arrayLibros) {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/main.js" type="module"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Registro de Pokémon</h2>
+      <form id="addForm">
+        <input type="text" id="name" placeholder="Nombre" required />
+        <select name="type" id="type" required>
+          <option value="fuego">fuego</option>
+          <option value="agua">agua</option>
+          <option value="planta">planta</option>
+        </select>
+        <input
+          type="number"
+          min="1"
+          max="100"
+          placeholder="Nivel"
+          id="nivel"
+          required
+        />
+        <button type="submit" id="btnañadir">Añadir Pokémon</button>
+      </form>
+      <div id="statscss">
+        <h2>Estadísticas</h2>
+        <button type="submit" id="stats">mostrar stats</button>
+        <div id="stats"></div>
+      </div>
+      <h2>Listado de Pokémon</h2>
+      <input type="text" placeholder="Buscar por nombre o tipo" id="search" />
+      <button type="submit" id="buscarpokemon">Buscar</button>
+      <button type="submit" id="volvercargar">Volver a cargar pokemones</button>
+      <div id="row"></div>
+      <ul id="pokemonList"></ul>
+    </div>
+    <button type="submit" id="borrar">Borrar pokemones</button>
+  </body>
+</html>

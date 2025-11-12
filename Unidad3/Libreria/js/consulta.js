@@ -1,8 +1,9 @@
 const listalibros = JSON.parse(sessionStorage.getItem("LIBRERIA")) || [];
 const ul = document.getElementById("listalibros");
 
+
 function mostrarLibros(arrayLibros) {
-  ul.innerHTML = ""; 
+  ul.innerHTML = "";
   arrayLibros.forEach((libro) => {
     const prestado = libro.prestado ? "Sí" : "No";
     const item = document.createElement("li");
@@ -29,5 +30,3 @@ document.addEventListener("DOMContentLoaded", () => {
     mostrarLibros(listalibros);
   }
 });
-
-

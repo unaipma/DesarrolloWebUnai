@@ -14,17 +14,14 @@ btnSubmit.addEventListener("click", (event) => {
   addStorage(listalibros);
   window.alert("Libro agregado correctamente");
 
-  
   if (form) {
     form.reset();
   } else {
-    
     document.getElementById("titulo").value = "";
     document.getElementById("autor").value = "";
     document.getElementById("paginas").value = "";
     document.getElementById("prestado").checked = false;
   }
-  
 });
 
 function addStorage(array) {

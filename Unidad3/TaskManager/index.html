@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <section id="form-section">
+      <h1>📝 Task Manager Pro</h1>
+      <form id="task-form">
+        <input type="text" id="title" placeholder="Título de la tarea" required>
+        <textarea id="description" placeholder="Descripción"></textarea>
+        <select id="type">
+          <option value="normal">Normal</option>
+          <option value="urgent">Urgente</option>
+          <option value="scheduled">Programada</option>
+        </select>
+        <button type="submit">Añadir tarea</button>
+      </form>
+    </section>
+
+    <section id="list-section">
+      <h2>📋 Lista de tareas</h2>
+      <ul id="task-list"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+Singleton - factory - builder
+Adapter - facade - (?decorator?)
+Strattegy - command - state
+🧪 PATRONES CREACIONALES
+🟦 1. FACTORY METHOD
+
+📌 Cuándo usarlo:
+
+Cuando necesitas crear objetos según su tipo, pero no quieres usar new por todas partes.
+
+Cuando hay varias clases hijas y quieres decidir cuál instanciar en tiempo de ejecución.
+
+Cuando quieres desacoplar la creación del código principal.
+
+💬 Frase clave para examen:
+
+“Lo uso cuando quiero centralizar la creación de objetos y permitir extensibilidad sin tocar el código cliente”.
+
+🟦 2. ABSTRACT FACTORY
+
+📌 Cuándo usarlo:
+
+Cuando necesitas crear familias de objetos relacionados (por ejemplo: botones, inputs y componentes de un mismo estilo).
+
+Cuando quieres asegurarte de que todos los objetos pertenecen al mismo contexto o tema.
+
+💬 Frase clave:
+
+“Lo uso cuando quiero crear familias de objetos compatibles sin especificar sus clases concretas”.
+
+🟦 3. BUILDER
+
+📌 Cuándo usarlo:
+
+Cuando un objeto tiene muchísimos parámetros opcionales.
+
+Cuando la construcción es paso a paso.
+
+Cuando quieres usar encadenamiento (fluency) tipo .setX().setY().build().
+
+💬 Frase clave:
+
+“Lo uso cuando quiero construir objetos complejos paso a paso sin crear constructores enormes”.
+
+🟦 4. SINGLETON
+
+📌 Cuándo usarlo:
+
+Cuando solo debe existir una única instancia (config, logger, conexión global…).
+
+💬 Frase clave:
+
+“Lo uso cuando debo asegurar una única instancia en toda la aplicación”.
+
+🧱 PATRONES ESTRUCTURALES
+🟩 5. FACADE
+
+📌 Cuándo usarlo:
+
+Cuando tienes un sistema complejo y quieres ofrecer una interfaz sencilla.
+
+Cuando varios métodos están dispersos y quieres unificarlos en uno.
+
+Cuando ocultar la complejidad interna es beneficioso.
+
+💬 Frase clave:
+
+“Lo uso para simplificar un subsistema complejo mediante una interfaz unificada”.
+
+🟩 6. ADAPTER
+
+📌 Cuándo usarlo:
+
+Cuando necesitas hacer que dos interfaces incompatibles trabajen juntas.
+
+Cuando integras código antiguo con código nuevo.
+
+💬 Frase clave:
+
+“Lo uso para convertir una interfaz en otra compatible sin modificar el código original”.
+
+🟩 7. DECORATOR
+
+📌 Cuándo usarlo:
+
+Cuando quieres añadir funcionalidades extra a un objeto sin modificar su clase.
+
+Cuando las extensiones deben poder combinarse dinámicamente.
+
+💬 Frase clave:
+
+“Lo uso para añadir responsabilidades a objetos en tiempo de ejecución de forma flexible”.
+
+🟩 8. COMPOSITE
+
+📌 Cuándo usarlo:
+
+Cuando tienes estructuras jerárquicas (carpetas/archivos, menús, nodos).
+
+Cuando quieres que un objeto y un grupo de objetos se traten igual.
+
+💬 Frase clave:
+
+“Lo uso para trabajar con estructuras árbol y tratar objetos y colecciones de la misma forma”.
+
+🔄 PATRONES COMPORTAMENTALES
+🟧 9. OBSERVER
+
+📌 Cuándo usarlo:
+
+Cuando un objeto cambia y otros deben reaccionar automáticamente.
+
+Cuando quieres desacoplar emisores de receptores.
+
+Cuando hay eventos o notificaciones.
+
+💬 Frase clave:
+
+“Lo uso cuando necesito que varios módulos reaccionen a cambios sin estar acoplados”.
+
+🟧 10. STRATEGY
+
+📌 Cuándo usarlo:
+
+Cuando tienes distintas formas de hacer algo (distintos algoritmos).
+
+Cuando quieres poder sustituir un comportamiento durante la ejecución.
+
+💬 Frase clave:
+
+“Lo uso para intercambiar algoritmos o comportamientos de forma dinámica”.
+
+🟧 11. COMMAND
+
+📌 Cuándo usarlo:
+
+Cuando quieres encapsular acciones (deshacer/rehacer, colas de comandos).
+
+Cuando varios botones/acciones deben ejecutar procesos distintos pero con estructura similar.
+
+💬 Frase clave:
+
+“Lo uso para encapsular operaciones como objetos independientes”.
+
+🟧 12. STATE
+
+📌 Cuándo usarlo:
+
+Cuando un objeto cambia su comportamiento según su estado interno.
+
+Cuando tienes muchos if (estado) o switch.
+
+💬 Frase clave:
+
+“Lo uso para cambiar el comportamiento de un objeto según su estado, evitando condicionales”.
+
+🟧 13. MEDIATOR
+
+📌 Cuándo usarlo:
+
+Cuando muchos módulos se comunican entre sí de forma desordenada.
+
+Para evitar un código lleno de dependencias entre objetos.
+
+💬 Frase clave:
+
+“Lo uso para centralizar la comunicación entre objetos y reducir el acoplamiento”.
+
+🧨 RESUMEN ULTRARRÁPIDO (para memorizar)
+Patrón	Activador mental “cuándo usarlo”
+Factory	Crear objetos según tipo.
+Abstract Factory	Familias de objetos relacionados.
+Builder	Objetos complejos paso a paso.
+Singleton	Única instancia global.
+Facade	Simplificar sistema complejo.
+Adapter	Hacer compatibles dos interfaces.
+Decorator	Añadir funcionalidad sin tocar el código.
+Composite	Árboles de objetos.
+Observer	Eventos y notificaciones.
+Strategy	Distintos algoritmos intercambiables.
+Command	Acciones encapsuladas (undo/redo).
+State	Cambios de comportamiento según estado.
+Mediator	Evitar dependencias en red.

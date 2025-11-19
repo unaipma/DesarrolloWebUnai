@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thomas y sus Amigos: Gestor de Trenes</title>
+      <script defer src="js/main.js" type="module"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app">
+     
+      <section id="registration-form">
+        <form id="addForm">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <select name="type" id="tipo" required>
+          <option value="vapor">vapor</option>
+          <option value="diesel">diesel</option>
+          <option value="Electrico">electrico</option>
+          <option value="maglev">maglev</option>
+        </select>
+        <input type="number" id="velocidad" placeholder="velocidad">
+        <button id="submit">Añadir</button>
+        <button id="borrar">Borrar LOCAL</button>
+      </section>
+
+     
+      <section id="train-list">
+        <h1>Trenes</h1>
+        <input type="text" id="busqueda">
+        <button id="buscar">Buscar</button>
+        <ul id="list">
+
+        </ul>
+      </section>
+
+     
+      <section id="simulation-section">
+        <h2>Simulación</h2>
+        <select name="type" id="origen" required>
+          <option value="SodorCentral">Sodor Central</option>
+          <option value="Knapford">Knapford</option>
+          <option value="Vicarstown">Vicarstown</option>
+          <option value="TidmouthSheds">Tidmouth Sheds</option>
+        </select>
+        <select name="type" id="destino" required>
+          <option value="Sodor Central">Sodor Central</option>
+          <option value="Knapford">Knapford</option>
+          <option value="Vicarstown">Vicarstown</option>
+          <option value="TidmouthSheds">Tidmouth Sheds</option>
+        </select>
+        <input type="text" id="trensel" placeholder="tren">
+        <button id="simular">Simular</button>
+        <ul id="sim"></ul>
+      </section>
+    </div>
+    
+  </body>
+</html>

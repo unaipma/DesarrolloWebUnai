@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokédex Simple</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+      }
+      input,
+      select,
+      button {
+        margin: 5px;
+      }
+      .pokemon {
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Pokédex Simple</h1>
+
+    <!-- Formulario -->
+    <div>
+      <input type="text" id="pokemonName" placeholder="Nombre del Pokémon" />
+      <select id="pokemonType">
+        <option value="Fuego">Fuego</option>
+        <option value="Agua">Agua</option>
+        <option value="Planta">Planta</option>
+      </select>
+      <button id="addBtn">Agregar Pokémon</button>
+    </div>
+
+    <!-- Búsqueda y filtro -->
+    <div>
+      <input type="text" id="searchName" placeholder="Buscar por nombre" />
+      <select id="filterType">
+        <option value="">Todos</option>
+        <option value="Fuego">Fuego</option>
+        <option value="Agua">Agua</option>
+        <option value="Planta">Planta</option>
+      </select>
+      <button id="filterBtn">Buscar/Filtrar</button>
+    </div>
+
+    <!-- Lista de Pokémon -->
+    <div id="pokemonList"></div>
+
+    <script>
+      /************ Creacional - Factory ************/
+      class PokemonFactory {
+        static create(name, type) {
+          return { name, type };
+        }
+      }
+
+      /************ Base de datos simple ************/
+      const pokedex = [];
+
+      /************ Estructural - Facade ************/
+      class PokemonFacade {
+        static addPokemon(pokemon) {
+          pokedex.push(pokemon);
+          PokemonFacade.render(pokedex);
+        }
+
+        static removePokemon(name) {
+          const index = pokedex.findIndex((p) => p.name === name);
+          if (index !== -1) pokedex.splice(index, 1);
+          PokemonFacade.render(pokedex);
+        }
+
+        static render(list) {
+          const html = list
+            .map(
+              (p) => `
+      <div class="pokemon">
+        <strong>${p.name}</strong> - Tipo: ${p.type}
+        <button onclick="commands.remove('${p.name}')">Eliminar</button>
+      </div>`
+            )
+            .join("");
+          document.getElementById("pokemonList").innerHTML = html;
+        }
+
+        static filter(name, type) {
+          let result = pokedex;
+          if (name)
+            result = result.filter((p) =>
+              p.name.toLowerCase().includes(name.toLowerCase())
+            );
+          if (type) result = result.filter((p) => p.type === type);
+          PokemonFacade.render(result);
+        }
+      }
+
+      /************ Comportamiento - Command ************/
+      class AddPokemonCommand {
+        constructor(name, type) {
+          this.name = name;
+          this.type = type;
+        }
+        execute() {
+          const pokemon = PokemonFactory.create(this.name, this.type);
+          PokemonFacade.addPokemon(pokemon);
+        }
+      }
+
+      class RemovePokemonCommand {
+        constructor(name) {
+          this.name = name;
+        }
+        execute() {
+          PokemonFacade.removePokemon(this.name);
+        }
+      }
+
+      /************ Encapsulamos los comandos ************/
+      const commands = {
+        add: (name, type) => new AddPokemonCommand(name, type).execute(),
+        remove: (name) => new RemovePokemonCommand(name).execute(),
+      };
+
+      /************ Eventos ************/
+      document.getElementById("addBtn").addEventListener("click", () => {
+        const name = document.getElementById("pokemonName").value.trim();
+        const type = document.getElementById("pokemonType").value;
+        if (!name) return alert("Escribe un nombre!");
+        commands.add(name, type);
+        document.getElementById("pokemonName").value = "";
+      });
+
+      document.getElementById("filterBtn").addEventListener("click", () => {
+        const name = document.getElementById("searchName").value.trim();
+        const type = document.getElementById("filterType").value;
+        PokemonFacade.filter(name, type);
+      });
+    </script>
+  </body>
+</html>

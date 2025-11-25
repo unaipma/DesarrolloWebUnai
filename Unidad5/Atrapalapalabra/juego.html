@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jugar</title>
+    <script defer src="js/juego.js" type="module"></script>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>Bienvenido:</h1>
+      <h2 id="nombreuser"></h2>
+      <h3>Mayor puntuación:</h3>
+      <h3 id="puntuacion"></h3>
+    </header>
+    <section id="jugar">
+      <button id="btnjugar">Jugar</button>
+
+      <div id="palabra">
+        <div id="juego"></div>
+        <input type="text" name="palabra" id="palabra" />
+      </div>
+    </section>
+  </body>
 </html>

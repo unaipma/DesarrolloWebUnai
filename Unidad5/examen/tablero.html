@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablero Completo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #tablero {
+        width: 80%;
+        height: 500px;
+        border: 2px solid #000;
+        margin: 20px auto;
+        position: relative;
+        background: #f0f0f0;
+      }
+      .cuadro {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        position: absolute;
+        cursor: move;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+      }
+      button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Tablero de Eventos de Ratón</h2>
+    <button onclick="agregarCuadro()">Añadir Cuadro</button>
+    <div id="tablero"></div>
+
+    <script>
+      let contador = 0;
+
+      function agregarCuadro() {
+        contador++;
+        const tablero = document.getElementById("tablero");
+        const div = document.createElement("div");
+        div.classList.add("cuadro");
+        div.id = "cuadro" + contador;
+        div.style.top = Math.random() * (tablero.clientHeight - 100) + "px";
+        div.style.left = Math.random() * (tablero.clientWidth - 100) + "px";
+        div.textContent = "Cuadro " + contador;
+
+        // EVENTOS DE RATÓN
+
+        // Click simple → cambiar color
+        div.addEventListener("click", () => {
+          div.style.backgroundColor =
+            "#" + Math.floor(Math.random() * 16777215).toString(16);
+        });
+
+        // Doble click → editar texto
+        div.addEventListener("dblclick", () => {
+          const nuevoTexto = prompt("Escribe nuevo texto:", div.textContent);
+          if (nuevoTexto !== null) div.textContent = nuevoTexto;
+        });
+
+        // Clic derecho → eliminar
+        div.addEventListener("contextmenu", (e) => {
+          e.preventDefault();
+          tablero.removeChild(div);
+        });
+
+        // Mouse down → cambiar borde
+        div.addEventListener("mousedown", () => {
+          div.style.border = "2px dashed red";
+        });
+
+        // Mouse up → quitar borde
+        div.addEventListener("mouseup", () => {
+          div.style.border = "none";
+        });
+
+        // Mouse enter → aumentar tamaño
+        div.addEventListener("mouseenter", () => {
+          div.style.transform = "scale(1.2)";
+        });
+
+        // Mouse leave → restaurar tamaño
+        div.addEventListener("mouseleave", () => {
+          div.style.transform = "scale(1)";
+        });
+
+        // Mouse over → mostrar sombra
+        div.addEventListener("mouseover", () => {
+          div.style.boxShadow = "5px 5px 15px rgba(0,0,0,0.5)";
+        });
+
+        // Mouse out → quitar sombra
+        div.addEventListener("mouseout", () => {
+          div.style.boxShadow = "none";
+        });
+
+        // Wheel → girar el cuadro
+        div.addEventListener("wheel", (e) => {
+          let rotation = div.dataset.rotation
+            ? parseInt(div.dataset.rotation)
+            : 0;
+          rotation += e.deltaY > 0 ? 15 : -15;
+          div.style.transform = `rotate(${rotation}deg)`;
+          div.dataset.rotation = rotation;
+        });
+
+        // Drag & drop simple
+        div.addEventListener("mousedown", dragMouseDown);
+
+        function dragMouseDown(e) {
+          e.preventDefault();
+          let offsetX = e.clientX - div.offsetLeft;
+          let offsetY = e.clientY - div.offsetTop;
+
+          function dragMouseMove(e) {
+            div.style.left = e.clientX - offsetX + "px";
+            div.style.top = e.clientY - offsetY + "px";
+          }
+
+          function dragMouseUp() {
+            document.removeEventListener("mousemove", dragMouseMove);
+            document.removeEventListener("mouseup", dragMouseUp);
+          }
+
+          document.addEventListener("mousemove", dragMouseMove);
+          document.addEventListener("mouseup", dragMouseUp);
+        }
+
+        tablero.appendChild(div);
+      }
+    </script>
+  </body>
+</html>

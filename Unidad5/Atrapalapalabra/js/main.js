@@ -16,12 +16,14 @@ formulario.addEventListener("submit", function (e) {
 
   if (data.length < 1) {
     data.push(new user(nombre, pass));
+    
     DOMFacade.get("res").textContent = "Usuario registrado";
   } else {
     data.forEach((element) => {
       if (element.nombre === nombre) {
         usuarioEncontrado = true;
         if (element.password === pass) {
+         sessionStorage.setItem("jugador", JSON.stringify(element));
           window.location.href = "juego.html";
         } else {
           DOMFacade.get("res").textContent = "Incorrecto";
@@ -37,3 +39,5 @@ formulario.addEventListener("submit", function (e) {
 
   Singleton.setusuarios(data);
 });
+
+

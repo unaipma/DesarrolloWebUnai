@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login y Registro</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      input {
+        margin: 5px;
+        padding: 5px;
+        width: 200px;
+      }
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+      .container {
+        margin-bottom: 30px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        display: inline-block;
+      }
+      h2 {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Iniciar sesión</h2>
+      <input
+        type="text"
+        id="loginUsuario"
+        placeholder="Usuario"
+        autocomplete="username"
+      /><br />
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Contraseña"
+        autocomplete="current-password"
+      /><br />
+      <button onclick="login()">Entrar</button>
+      <p class="error" id="errorLogin"></p>
+    </div>
+
+    <div class="container">
+      <h2>Registrarse</h2>
+      <input
+        type="text"
+        id="regUsuario"
+        placeholder="Usuario"
+        autocomplete="username"
+      /><br />
+      <input
+        type="password"
+        id="regPassword"
+        placeholder="Contraseña"
+        autocomplete="new-password"
+      /><br />
+      <button onclick="registrar()">Registrar</button>
+      <p class="error" id="errorRegistro"></p>
+    </div>
+
+    <script>
+      // Función de registro
+      function registrar() {
+        const usuario = document.getElementById("regUsuario").value.trim();
+        const password = document.getElementById("regPassword").value.trim();
+        const error = document.getElementById("errorRegistro");
+
+        if (usuario === "" || password === "") {
+          error.textContent = "Debes rellenar ambos campos.";
+          error.className = "error";
+          return;
+        }
+
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+        if (usuarios.some((u) => u.usuario === usuario)) {
+          error.textContent = "El usuario ya existe.";
+          error.className = "error";
+          return;
+        }
+
+        usuarios.push({ usuario, password });
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        error.textContent = "Registro exitoso. Ahora puedes iniciar sesión.";
+        error.className = "success";
+
+        document.getElementById("regUsuario").value = "";
+        document.getElementById("regPassword").value = "";
+      }
+
+      // Función de login
+      function login() {
+        const usuario = document.getElementById("loginUsuario").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const error = document.getElementById("errorLogin");
+
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        const user = usuarios.find(
+          (u) => u.usuario === usuario && u.password === password
+        );
+
+        if (user) {
+          // Redirige al tablero sin guardar sesión
+          window.location.href = "tablero.html";
+        } else {
+          error.textContent = "Usuario o contraseña incorrectos";
+          error.className = "error";
+        }
+      }
+    </script>
+  </body>
+</html>

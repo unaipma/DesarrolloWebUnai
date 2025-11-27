@@ -1,0 +1,41 @@
+<style>
+  #tablero {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 10px;
+  }
+  .cuadro {
+    width: 80px;
+    height: 80px;
+    background: lightgray;
+    border: 1px solid #333;
+    cursor: pointer;
+  }
+</style>
+
+<div id="tablero">
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+  <div class="cuadro"></div>
+</div>
+
+<script>
+  const tablero = document.getElementById("tablero");
+
+  tablero.addEventListener("click", (e) => {
+    // Nos aseguramos de que el clic viene de un cuadro
+    if (e.target.classList.contains("cuadro")) {
+      // Cambia el color SOLO del elemento clicado
+      e.target.style.background = getRandomColor();
+    }
+  });
+
+  function getRandomColor() {
+    return `hsl(${Math.random() * 360}, 70%, 60%)`;
+  }
+</script>

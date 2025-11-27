@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin - Usuarios</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer type="module" src="admin.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Panel Admin - Gestión de Usuarios</h1>
+    <section id="controls">
+      <button id="btnCreate">Crear usuario</button>
+      <button id="btnRefresh">Refrescar</button>
+      <a href="login.html">Volver a Login</a>
+    </section>
+
+    <section id="usersList">
+      <table>
+        <thead>
+          <tr><th>Usuario</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Rol</th><th>Acciones</th></tr>
+        </thead>
+        <tbody id="tbodyUsers"></tbody>
+      </table>
+    </section>
+
+    <dialog id="dlgUser">
+      <form id="userForm">
+        <label>Usuario: <input id="u_username" name="username" required></label>
+        <label>Nombre: <input id="u_name" name="name" required></label>
+        <label>Email: <input id="u_email" name="email" type="email" required></label>
+        <label>Teléfono: <input id="u_phone" name="phone" required></label>
+        <label>Contraseña: <input id="u_password" name="password" type="password" required></label>
+        <label>Rol: <select id="u_role"><option value="user">Usuario</option><option value="admin">Administrador</option></select></label>
+        <menu>
+          <button id="btnSave" type="submit">Guardar</button>
+          <button id="btnCancel" type="button">Cancelar</button>
+        </menu>
+      </form>
+    </dialog>
+</body>
+</html>

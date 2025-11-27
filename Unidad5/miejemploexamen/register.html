@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Registro</h1>
+
+  <form id="formRegister">
+  <label>Nombre</label>
+  <input id="name" required minlength="3">
+
+  <label>Email</label>
+  <input id="email" type="email" required>
+
+  <label>Teléfono</label>
+  <input id="phone" required placeholder="612345678">
+
+  <label>Usuario</label>
+  <input id="username" required autocomplete="off">
+
+  <label>Contraseña</label>
+  <input id="password" type="password" required minlength="4">
+
+  <button type="submit">Registrarme</button>
+</form>
+
+
+  <p>¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a></p>
+
+  <script src="register.js"></script>
+</body>
+</html>

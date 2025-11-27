@@ -1,0 +1,28 @@
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 10px;
+}
+
+#tablero {
+  margin-top: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 100px);
+  gap: 10px;
+}
+
+.cuadro {
+  width: 100px;
+  height: 100px;
+  background: lightgray;
+  border: 2px solid #444;
+  cursor: pointer;
+  user-select: none;
+}

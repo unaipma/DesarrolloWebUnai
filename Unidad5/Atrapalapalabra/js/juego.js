@@ -3,31 +3,9 @@
 import { DOMFacade } from "../js/DomFacade.js";
 
 const palabras = [
-  "casa",
-  "perro",
-  "computadora",
-  "sol",
-  "montaña",
-  "libro",
-  "ciudad",
-  "coche",
-  "música",
-  "ventana",
-  "playa",
-  "cielo",
-  "lluvia",
-  "bosque",
-  "río",
-  "teléfono",
-  "mesa",
-  "silla",
-  "puerta",
-  "camino",
-  "flor",
-  "nube",
-  "fuego",
-  "tiempo",
-  "estrella",
+  "casa","perro","computadora","sol","montaña","libro","ciudad","coche",
+  "música","ventana","playa","cielo","lluvia","bosque","río","teléfono",
+  "mesa","silla","puerta","camino","flor","nube","fuego","tiempo","estrella",
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -37,16 +15,53 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const btnjugar = DOMFacade.get("btnjugar");
+const input = DOMFacade.get("palabra");
 
-btnjugar.addEventListener("click", function (e) {
-  let div = DOMFacade.get("juego");
-  palabras.forEach((element) => {
-    let palabra = document.createElement("p");
-    palabra.textContent = element;
-    const intervalID = setInterval(myCallback, 500, palabra);
-  });
-});
+let intervalo = null;
+let palabraActual = "";
+let palabraElemento = DOMFacade.get("palabraMostrar");
 
-function myCallback(a, b, palabra) {
-  palabra.style.top = window.screen.height / 2 + "px";
+btnjugar.addEventListener("click", iniciarJuego);
+
+function iniciarJuego() {
+  nuevaPalabra();
+
+  if (!intervalo) {
+    intervalo = setInterval(bajar, 50);
+  }
 }
+
+function nuevaPalabra() {
+  palabraActual = palabras[Math.floor(Math.random() * palabras.length)];
+  palabraElemento.textContent = palabraActual;
+  palabraElemento.style.position = "absolute";
+  palabraElemento.style.top = "0px";
+  palabraElemento.style.left = "50%"; 
+  input.value = "";
+  input.focus();
+}
+
+function bajar() {
+  let topActual = parseFloat(palabraElemento.style.top);
+
+  if (isNaN(topActual)) topActual = 0;
+
+  palabraElemento.style.top = topActual + 3 + "px";
+
+  
+  const limiteY = 350; 
+
+  if (topActual >= limiteY) {
+    alert("¡Has perdido! No escribiste la palabra a tiempo.");
+    nuevaPalabra();
+  }
+}
+
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    if (input.value.trim() === palabraActual) {
+      nuevaPalabra();
+    }
+  }
+});

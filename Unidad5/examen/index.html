@@ -48,7 +48,7 @@
         autocomplete="current-password"
       /><br />
       <button onclick="login()">Entrar</button>
-      <p class="error" id="errorLogin"></p>
+      <p id="errorLogin"></p>
     </div>
 
     <div class="container">
@@ -66,56 +66,109 @@
         autocomplete="new-password"
       /><br />
       <button onclick="registrar()">Registrar</button>
-      <p class="error" id="errorRegistro"></p>
+      <p id="errorRegistro"></p>
     </div>
 
     <script>
-      // Función de registro
+      // VALIDACIONES COMUNES
+      function validarUsuario(usuario) {
+        if (usuario.length < 3)
+          return "El usuario debe tener al menos 3 caracteres.";
+        if (!/^[a-zA-Z0-9]+$/.test(usuario))
+          return "El usuario solo puede contener letras y números.";
+        return "";
+      }
+
+      function validarPassword(password) {
+        if (password.length < 4)
+          return "La contraseña debe tener al menos 4 caracteres.";
+        if (!/^[a-zA-Z0-9]+$/.test(password))
+          return "La contraseña solo puede contener letras y números.";
+        return "";
+      }
+
+      // REGISTRO
       function registrar() {
         const usuario = document.getElementById("regUsuario").value.trim();
         const password = document.getElementById("regPassword").value.trim();
-        const error = document.getElementById("errorRegistro");
+        const mensaje = document.getElementById("errorRegistro");
 
-        if (usuario === "" || password === "") {
-          error.textContent = "Debes rellenar ambos campos.";
-          error.className = "error";
+        // Validaciones
+        if (!usuario || !password) {
+          mensaje.textContent = "Debes rellenar ambos campos.";
+          mensaje.className = "error";
           return;
         }
 
-        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        let errorUsuario = validarUsuario(usuario);
+        if (errorUsuario) {
+          mensaje.textContent = errorUsuario;
+          mensaje.className = "error";
+          return;
+        }
 
+        let errorPassword = validarPassword(password);
+        if (errorPassword) {
+          mensaje.textContent = errorPassword;
+          mensaje.className = "error";
+          return;
+        }
+
+        // Verificar si usuario existe
+        let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
         if (usuarios.some((u) => u.usuario === usuario)) {
-          error.textContent = "El usuario ya existe.";
-          error.className = "error";
+          mensaje.textContent = "El usuario ya existe.";
+          mensaje.className = "error";
           return;
         }
 
         usuarios.push({ usuario, password });
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
-        error.textContent = "Registro exitoso. Ahora puedes iniciar sesión.";
-        error.className = "success";
-
+        mensaje.textContent = "Registro exitoso. Ahora puedes iniciar sesión.";
+        mensaje.className = "success";
         document.getElementById("regUsuario").value = "";
         document.getElementById("regPassword").value = "";
       }
 
-      // Función de login
+      // LOGIN
       function login() {
         const usuario = document.getElementById("loginUsuario").value.trim();
         const password = document.getElementById("loginPassword").value.trim();
-        const error = document.getElementById("errorLogin");
+        const mensaje = document.getElementById("errorLogin");
 
+        // Validaciones
+        if (!usuario || !password) {
+          mensaje.textContent = "Debes rellenar ambos campos.";
+          mensaje.className = "error";
+          return;
+        }
+
+        let errorUsuario = validarUsuario(usuario);
+        if (errorUsuario) {
+          mensaje.textContent = errorUsuario;
+          mensaje.className = "error";
+          return;
+        }
+
+        let errorPassword = validarPassword(password);
+        if (errorPassword) {
+          mensaje.textContent = errorPassword;
+          mensaje.className = "error";
+          return;
+        }
+
+        // Verificar usuario y contraseña
         let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
         const user = usuarios.find(
           (u) => u.usuario === usuario && u.password === password
         );
 
         if (user) {
-          // Redirige al tablero sin guardar sesión
+          // Login exitoso, redirigir al tablero
           window.location.href = "tablero.html";
         } else {
-          error.textContent = "Usuario o contraseña incorrectos";
-          error.className = "error";
+          mensaje.textContent = "Usuario o contraseña incorrectos.";
+          mensaje.className = "error";
         }
       }
     </script>

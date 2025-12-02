@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Control</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Auth Container -->
+      <div id="auth-container" class="auth-wrapper">
+        <!-- Login Form -->
+        <div id="login-form" class="auth-card active">
+          <h2>Iniciar Sesión</h2>
+          <p class="subtitle">Bienvenido de nuevo</p>
+          <form id="form-login">
+            <div class="input-group">
+              <label for="login-username">Usuario</label>
+              <input
+                type="text"
+                id="login-username"
+                required
+                placeholder="Ingresa tu usuario"
+              />
+            </div>
+            <div class="input-group">
+              <label for="login-password">Contraseña</label>
+              <input
+                type="password"
+                id="login-password"
+                required
+                placeholder="••••••••"
+              />
+            </div>
+            <button type="submit" class="btn-primary">Entrar</button>
+          </form>
+          <p class="switch-auth">
+            ¿No tienes cuenta? <a href="#" id="show-register">Regístrate</a>
+          </p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form" class="auth-card hidden">
+          <h2>Crear Cuenta</h2>
+          <p class="subtitle">Únete a nosotros</p>
+          <form id="form-register">
+            <div class="input-group">
+              <label for="reg-username">Usuario</label>
+              <input
+                type="text"
+                id="reg-username"
+                required
+                placeholder="Elige un nombre de usuario"
+              />
+            </div>
+            <div class="input-group">
+              <label for="reg-password">Contraseña</label>
+              <input
+                type="password"
+                id="reg-password"
+                required
+                placeholder="••••••••"
+              />
+            </div>
+            <div class="input-group">
+              <label for="reg-role">Rol</label>
+              <select id="reg-role">
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary">Registrarse</button>
+          </form>
+          <p class="switch-auth">
+            ¿Ya tienes cuenta? <a href="#" id="show-login">Inicia Sesión</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Dashboard -->
+      <div id="dashboard" class="dashboard-wrapper hidden">
+        <header class="dashboard-header">
+          <h1>Panel de Control</h1>
+          <div class="user-info">
+            <span id="current-user-display">Hola, Usuario</span>
+            <button id="logout-btn" class="btn-secondary">Cerrar Sesión</button>
+          </div>
+        </header>
+
+        <main class="dashboard-content">
+          <div class="users-section">
+            <h3>Usuarios del Sistema</h3>
+            <div id="users-grid" class="cards-grid">
+              <!-- User cards generated dynamically -->
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Edit User Modal (Admin only) -->
+    <div id="edit-modal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Editar Usuario</h3>
+        <form id="form-edit-user">
+          <input type="hidden" id="edit-original-username" />
+          <div class="input-group">
+            <label for="edit-username">Nuevo Nombre</label>
+            <input type="text" id="edit-username" required />
+          </div>
+          <div class="modal-actions">
+            <button type="button" id="cancel-edit" class="btn-secondary">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="DOMBuilder.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

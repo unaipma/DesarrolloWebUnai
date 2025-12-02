@@ -1,0 +1,12 @@
+header {
+  display: flex;
+  flex-direction: row;
+}
+
+#contenedor {
+  flex-direction: row;
+}
+
+#perdedor {
+  color: red;
+}

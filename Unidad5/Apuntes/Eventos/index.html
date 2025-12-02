@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo de Eventos y Filtro Pokemon</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Playground de Eventos</h1>
+
+      <section class="playground">
+        <div class="card event-card">
+          <h2>Clicks</h2>
+          <button id="btn-click">Click Me</button>
+          <button id="btn-dblclick">Double Click Me</button>
+          <p id="click-feedback" class="feedback">Esperando acción...</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Mouse</h2>
+          <div id="mouse-box" class="box">Pasa el ratón por aquí</div>
+          <p id="mouse-feedback" class="feedback">Coordenadas: -</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Teclado</h2>
+          <input
+            type="text"
+            id="input-keyboard"
+            placeholder="Escribe algo..."
+          />
+          <p id="keyboard-feedback" class="feedback">Última tecla: -</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Foco</h2>
+          <input type="text" id="input-focus" placeholder="Foco aquí" />
+          <input type="text" id="input-blur" placeholder="Ahora aquí" />
+          <p id="focus-feedback" class="feedback">Estado: -</p>
+        </div>
+
+        <!-- NUEVOS EVENTOS -->
+
+        <div class="card event-card" style="grid-column: span 2">
+          <h2>Event Target & Delegación</h2>
+          <p style="margin-bottom: 0.5rem; font-size: 0.9rem">
+            Haz click en los items. El evento está en la lista (padre), pero
+            detectamos el item (hijo) con <code>target</code>.
+          </p>
+          <ul id="delegation-list" class="interactive-list">
+            <li>Item 1: Manzana 🍎</li>
+            <li>Item 2: Pera 🍐</li>
+            <li>Item 3: Plátano 🍌</li>
+            <li>Item 4: Sandía 🍉</li>
+          </ul>
+          <p id="target-feedback" class="feedback">Target: -</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Context Menu (Click Dcho)</h2>
+          <div id="context-box" class="box warning-box">
+            No hagas click derecho aquí
+          </div>
+          <p id="context-feedback" class="feedback">Estado: Normal</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Copy & Paste</h2>
+          <textarea
+            id="clipboard-area"
+            rows="3"
+            placeholder="Intenta copiar o pegar texto aquí..."
+          ></textarea>
+          <p id="clipboard-feedback" class="feedback">Esperando...</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Wheel (Rueda Ratón)</h2>
+          <div id="wheel-box" class="box wheel-box">Usa la rueda aquí</div>
+          <p id="wheel-feedback" class="feedback">Zoom: 1x</p>
+        </div>
+
+        <div class="card event-card">
+          <h2>Drag & Drop</h2>
+          <div class="drag-container">
+            <div id="draggable" class="draggable" draggable="true">
+              Arrastrame
+            </div>
+            <div id="dropzone" class="dropzone">Suelta aquí</div>
+          </div>
+          <p id="drag-feedback" class="feedback">Estado: Inactivo</p>
+        </div>
+      </section>
+
+      <hr />
+
+      <h1>Filtro Pokemon</h1>
+      <section class="pokemon-section">
+        <div class="search-container">
+          <label for="poke-search">Busca tu Pokemon:</label>
+          <textarea
+            id="poke-search"
+            rows="1"
+            placeholder="Escribe el nombre del pokemon..."
+          ></textarea>
+        </div>
+
+        <div id="pokemon-grid" class="pokemon-grid">
+          <!-- Las tarjetas se generarán aquí con JS -->
+        </div>
+      </section>
+    </div>
+
+    <script src="DOMBuilder.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

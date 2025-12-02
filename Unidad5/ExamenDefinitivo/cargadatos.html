@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cargar</title>
+    <script defer src="./main.js" type="module"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header id="header">
+      <img
+        src="./img/boat.jpg"
+        id="imagenArrow"
+        alt="barco"
+        width="100"
+        height="100"
+      />
+      <h2>SHIPWRECK</h2>
+      <h3 id="vidas"></h3>
+    </header>
+    <section id="formulario">
+      <form id="form">
+        <label>Num Filas</label>
+        <input id="filas" type="number" required min="0" />
+
+        <label>Num Columnas</label>
+        <input id="columnas" type="number" required min="0" />
+
+        <button id="Submit">Submit</button>
+      </form>
+    </section>
+    <h1 id="perdedor"></h1>
+
+    <div id="contenedor"></div>
+  </body>
+</html>

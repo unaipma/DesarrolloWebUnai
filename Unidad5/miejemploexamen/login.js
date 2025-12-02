@@ -1,11 +1,14 @@
-const formLogin = document.getElementById("formLogin");
-const userLogin = document.getElementById("userLogin");
-const passLogin = document.getElementById("passLogin");
+import { DOMFacade } from "./DomFacade.js";
+import { UserSingleton } from "./userSingleton.js";
 
-formLogin.addEventListener("submit", e => {
+const formLogin = DOMFacade.get("formLogin");
+const userLogin = DOMFacade.get("userLogin");
+const passLogin = DOMFacade.get("passLogin");
+
+DOMFacade.on(formLogin, "submit", (e) => {
   e.preventDefault();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = UserSingleton.getUser();
 
   if (!user) {
     alert("No hay usuarios registrados.");

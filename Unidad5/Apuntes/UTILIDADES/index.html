@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilidades de Eventos JS</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        h2 { margin-top: 0; color: #333; }
+        .box { padding: 20px; margin: 10px; border: 2px solid #333; cursor: pointer; }
+        .inner-box { padding: 20px; background-color: #f0f0f0; border: 1px dashed #666; }
+        button { padding: 10px 20px; cursor: pointer; }
+        #console-output { background: #eee; padding: 10px; border-radius: 5px; min-height: 100px; font-family: monospace; }
+        .highlight { background-color: yellow; }
+    </style>
+</head>
+<body>
+    <h1>Ejemplos de Eventos en JavaScript</h1>
+    <p>Abre la consola del navegador (F12) para ver más detalles, o mira el cuadro de logs abajo.</p>
+
+    <div id="console-output">Logs aparecerán aquí...</div>
+    <button onclick="document.getElementById('console-output').innerHTML = ''">Limpiar Logs</button>
+
+    <!-- Ejemplo 1: Target vs CurrentTarget -->
+    <section id="ejemplo-target">
+        <h2>1. Target vs CurrentTarget</h2>
+        <p>Haz clic en el cuadro gris (hijo) y mira la diferencia.</p>
+        <div id="padre" class="box">
+            Soy el PADRE (tengo el listener)
+            <div id="hijo" class="inner-box">
+                Soy el HIJO (haz clic aquí)
+            </div>
+        </div>
+    </section>
+
+    <!-- Ejemplo 2: PreventDefault -->
+    <section id="ejemplo-prevent">
+        <h2>2. PreventDefault (Prevenir Comportamiento)</h2>
+        <p>Intenta hacer clic en el enlace o enviar el formulario.</p>
+        <a href="https://google.com" id="mi-enlace">Ir a Google (Bloqueado)</a>
+        <br><br>
+        <form id="mi-form">
+            <input type="text" placeholder="Escribe algo..." required>
+            <button type="submit">Enviar Formulario (Bloqueado)</button>
+        </form>
+    </section>
+
+    <!-- Ejemplo 3: StopPropagation -->
+    <section id="ejemplo-propagation">
+        <h2>3. StopPropagation (Detener Burbujeo)</h2>
+        <p>Haz clic en el botón. El div contenedor también tiene un evento, pero no se disparará.</p>
+        <div id="contenedor-burbuja" class="box" style="background: #e0e7ff;">
+            Contenedor (Click aquí dispara evento)
+            <br><br>
+            <button id="boton-stop">Botón con stopPropagation</button>
+        </div>
+    </section>
+
+    <!-- Ejemplo 4: Delegación de Eventos -->
+    <section id="ejemplo-delegacion">
+        <h2>4. Delegación de Eventos</h2>
+        <p>Añade botones dinámicamente. El listener está en el contenedor padre, no en cada botón.</p>
+        <button id="btn-agregar">Agregar Nuevo Botón</button>
+        <div id="lista-botones" style="margin-top: 10px; border: 1px solid #ddd; padding: 10px;">
+            <button class="btn-dinamico">Botón 1</button>
+            <button class="btn-dinamico">Botón 2</button>
+        </div>
+    </section>
+
+    <!-- Ejemplo 5: MouseOver / MouseOut -->
+    <section id="ejemplo-mouse">
+        <h2>5. MouseOver vs MouseOut (Hover)</h2>
+        <p>Pasa el ratón por encima del cuadro.</p>
+        <div id="caja-hover" class="box" style="transition: all 0.3s;">
+            Pasa el ratón aquí
+        </div>
+    </section>
+
+    <!-- Ejemplo 6: Input vs Change -->
+    <section id="ejemplo-input">
+        <h2>6. Input vs Change</h2>
+        <p>Escribe en los campos. 'Input' es en tiempo real, 'Change' es al salir (perder foco).</p>
+        <label>Evento Input (Real-time):</label>
+        <input type="text" id="campo-input" placeholder="Escribe aquí...">
+        <p>Resultado Input: <span id="res-input" style="font-weight: bold;"></span></p>
+        
+        <br>
+        
+        <label>Evento Change (Al terminar):</label>
+        <input type="text" id="campo-change" placeholder="Escribe y sal del campo...">
+        <p>Resultado Change: <span id="res-change" style="font-weight: bold;"></span></p>
+    </section>
+
+    <!-- Ejemplo 7: Target Práctico (Paleta de Colores) -->
+    <section id="ejemplo-paleta">
+        <h2>7. Target Práctico: Paleta de Colores</h2>
+        <p>Haz clic en un color para cambiar el fondo del cuadro grande. Usamos <b>event.target</b> para saber qué color tocaste.</p>
+        <div id="paleta" style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <div class="color-btn" style="width: 40px; height: 40px; background: red; cursor: pointer;" data-color="red"></div>
+            <div class="color-btn" style="width: 40px; height: 40px; background: blue; cursor: pointer;" data-color="blue"></div>
+            <div class="color-btn" style="width: 40px; height: 40px; background: green; cursor: pointer;" data-color="green"></div>
+            <div class="color-btn" style="width: 40px; height: 40px; background: orange; cursor: pointer;" data-color="orange"></div>
+            <div class="color-btn" style="width: 40px; height: 40px; background: purple; cursor: pointer;" data-color="purple"></div>
+        </div>
+        <div id="caja-destino" class="box" style="height: 100px; transition: background 0.5s;">
+            Elige un color arriba
+        </div>
+    </section>
+
+    <!-- Ejemplo 8: Teclado (KeyDown / KeyUp) -->
+    <section id="ejemplo-teclado">
+        <h2>8. Eventos de Teclado (KeyDown / KeyUp)</h2>
+        <p>Haz clic en el input y presiona teclas. Mira qué tecla presionaste.</p>
+        <input type="text" id="input-teclado" placeholder="Presiona teclas aquí...">
+        <p>Tecla presionada: <span id="res-tecla" style="font-weight: bold; color: blue;"></span></p>
+        <p>Código de tecla: <span id="res-code" style="font-weight: bold; color: red;"></span></p>
+    </section>
+
+    <!-- Ejemplo 9: Focus y Blur -->
+    <section id="ejemplo-focus">
+        <h2>9. Focus (Entrar) vs Blur (Salir)</h2>
+        <p>Haz clic dentro y fuera del campo. Cambiará de estilo.</p>
+        <input type="text" id="input-focus" placeholder="Hazme focus..." style="transition: 0.3s; padding: 10px; border: 2px solid #ccc;">
+    </section>
+
+    <!-- Ejemplo 10: Eventos de Ventana (Resize / Scroll) -->
+    <section id="ejemplo-window">
+        <h2>10. Eventos de Ventana (Resize / Scroll)</h2>
+        <p>Redimensiona la ventana o haz scroll para ver los contadores.</p>
+        <div style="background: #fef3c7; padding: 10px; border: 1px solid #d97706;">
+            <p>Resize (Redimensionar): <span id="res-resize">0</span> veces</p>
+            <p>Scroll (Desplazar): <span id="res-scroll">0</span> px</p>
+        </div>
+    </section>
+
+    <!-- Ejemplo 11: Portapapeles (Copy / Paste) -->
+    <section id="ejemplo-clipboard">
+        <h2>11. Portapapeles (Copy / Paste)</h2>
+        <p>Intenta copiar el texto o pegar algo en el input.</p>
+        <p id="texto-copiar" style="background: #e0e7ff; padding: 5px; display: inline-block;">¡Intenta copiarme! (No podrás)</p>
+        <br><br>
+        <input type="text" id="input-paste" placeholder="Intenta pegar aquí...">
+    </section>
+
+    <!-- Ejemplo 12: Doble Click (dblclick) -->
+    <section id="ejemplo-dblclick">
+        <h2>12. Doble Click (dblclick)</h2>
+        <p>Haz doble clic en el elemento para "editarlo" (simulado).</p>
+        <div id="caja-dblclick" class="box">
+            Haz doble clic aquí
+        </div>
+    </section>
+
+    <!-- Ejemplo 13: Click Derecho (contextmenu) -->
+    <section id="ejemplo-contextmenu">
+        <h2>13. Click Derecho Personalizado (contextmenu)</h2>
+        <p>Haz click derecho en el área gris. Prevenimos el menú del navegador.</p>
+        <div id="area-contextmenu" class="box" style="background: #f3f4f6; height: 100px; position: relative;">
+            Click derecho aquí
+        </div>
+    </section>
+
+    <!-- Ejemplo 14: CASO REAL - Panel de Administración (Delegación Avanzada) -->
+    <section id="ejemplo-admin-panel">
+        <h2>14. CASO REAL: Panel de Administración (Delegación)</h2>
+        <p>Este es un ejemplo típico de examen. Tienes una lista de usuarios y botones para cada uno.</p>
+        <p><b>El truco:</b> NO ponemos un listener en cada botón. Ponemos UNO SOLO en la tabla/lista y usamos <code>event.target</code> y <code>dataset</code>.</p>
+        
+        <div id="admin-panel" style="border: 1px solid #ccc; padding: 10px; border-radius: 5px;">
+            <h3>Lista de Usuarios</h3>
+            <div id="lista-usuarios">
+                <!-- Usuario 1 -->
+                <div class="user-row" style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; align-items: center;">
+                    <span>Usuario: <b>Juan Pérez</b> (ID: 101)</span>
+                    <div class="actions">
+                        <button class="btn-action btn-ver" data-id="101" data-action="ver" style="background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Ver</button>
+                        <button class="btn-action btn-editar" data-id="101" data-action="editar" style="background: #f59e0b; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Editar</button>
+                        <button class="btn-action btn-eliminar" data-id="101" data-action="eliminar" style="background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Eliminar</button>
+                    </div>
+                </div>
+
+                <!-- Usuario 2 -->
+                <div class="user-row" style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; align-items: center;">
+                    <span>Usuario: <b>María García</b> (ID: 102)</span>
+                    <div class="actions">
+                        <button class="btn-action btn-ver" data-id="102" data-action="ver" style="background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Ver</button>
+                        <button class="btn-action btn-editar" data-id="102" data-action="editar" style="background: #f59e0b; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Editar</button>
+                        <button class="btn-action btn-eliminar" data-id="102" data-action="eliminar" style="background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Eliminar</button>
+                    </div>
+                </div>
+
+                <!-- Usuario 3 -->
+                <div class="user-row" style="display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; align-items: center;">
+                    <span>Usuario: <b>Carlos López</b> (ID: 103)</span>
+                    <div class="actions">
+                        <button class="btn-action btn-ver" data-id="103" data-action="ver" style="background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Ver</button>
+                        <button class="btn-action btn-editar" data-id="103" data-action="editar" style="background: #f59e0b; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Editar</button>
+                        <button class="btn-action btn-eliminar" data-id="103" data-action="eliminar" style="background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="height: 500px;"></div> <!-- Espacio extra para probar scroll -->
+
+    <script src="script.js"></script>
+</body>
+</html>

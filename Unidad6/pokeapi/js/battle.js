@@ -1,9 +1,9 @@
 import { DOMFacade } from "./DomFacade.js";
 const URI = "https://pokeapi.co/api/v2/pokemon/";
 const sectionBattle = DOMFacade.get("battlesec");
-const btnEscapar= DOMFacade.get("btnescapar");
-const btnAtacar= DOMFacade.get("btnatacar");
-const btnCapturar= DOMFacade.get("btncapturar");
+const btnEscapar = DOMFacade.get("btnescapar");
+const btnAtacar = DOMFacade.get("btnatacar");
+const btnCapturar = DOMFacade.get("btncapturar");
 let currentPokemon = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,7 +18,7 @@ btnCapturar.addEventListener("click", () => {
   const probabilida = 100 - ((vidaActual * 100) / vidaMax);
 
   let rand = Math.floor(Math.random() * 100);
-  if(rand<probabilida){
+  if (rand < probabilida) {
     alert("Has capturado al pokemon!");
     sectionBattle.innerHTML = "";
     sacarPokemon();
@@ -27,15 +27,15 @@ btnCapturar.addEventListener("click", () => {
     if (img.dataset.shiny !== "true") {
       const mihp = DOMFacade.get("mihp");
       mihp.value = parseInt(mihp.value, 10) + Math.floor(parseInt(mihp.value, 10) * 0.5);
-    }else{
-      DOMFacade.get("mihp").value =1000;
+    } else {
+      DOMFacade.get("mihp").value = 1000;
     }
-    
-  }else{
+
+  } else {
     alert("El pokemon se ha escapado!");
     pokemonmeataca();
   }
-  
+
 
 
 
@@ -49,27 +49,54 @@ btnEscapar.addEventListener("click", () => {
 
 btnAtacar.addEventListener("click", () => {
   let vid = DOMFacade.get("vida").textContent;
-  let vida= parseInt(vid.split(" / ")[0].split(" HP: ")[1]);
+  let vida = parseInt(vid.split(" / ")[0].split(" HP: ")[1]);
   let ataque = Math.floor(Math.random() * 40);
   vida -= ataque;
   let vidaTexto = DOMFacade.get("vida");
   vidaTexto.textContent = ` HP: ${vida} / ${vid.split(" / ")[1]}`;
   let slider = DOMFacade.get("hpbar");
   slider.value = vida;
-  if(vida<1){
+  if (vida < 1) {
     alert("Has derrotado al pokemon!");
     sacarPokemon();
     guardarEnHistorial();
-  }else{
+  } else {
     pokemonmeataca();
   }
 
 });
-function guardarEnHistorial(){
-//me he quedado aqui (hay que crear la api :()
-}
 
-function pokemonmeataca(){
+function guardarEnHistorial() {
+
+
+  fetch('http://localhost:3000/pokemon', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      id: currentPokemon.id,
+      foto: currentPokemon.sprites.front_default,
+      nombre: currentPokemon.name,
+      shinny: DOMFacade.get("pokemonimg").dataset.shiny === "true",
+      nivel: Math.floor(Math.random() * 100) + 1
+    })
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error al guardar el Pokémon");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Pokémon guardado:", data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+};
+
+function pokemonmeataca() {
   let vidaEntrenadorInput = DOMFacade.get("mihp").value;
   let vidaEntrenador = parseInt(vidaEntrenadorInput);
   let ataquepokemon = DOMFacade.get("ataque").textContent;
@@ -77,7 +104,7 @@ function pokemonmeataca(){
   vidaEntrenador -= ataque;
   let vidaTextoEntrenador = DOMFacade.get("mihp");
   vidaTextoEntrenador.value = vidaEntrenador;
-  if(vidaEntrenador<1){
+  if (vidaEntrenador < 1) {
     alert("Has sido derrotado ");
     sectionBattle.innerHTML = "";
     sacarPokemon();
@@ -99,7 +126,7 @@ function sacarPokemon() {
     );
     let ataque = ataquestat ? ataquestat.base_stat : 100;
     at.textContent = `Ataque: ${ataque}`;
-   
+
 
     let imagen = DOMFacade.get("pokemonimg");
     let posibilidad = Math.floor(Math.random() * 100);
@@ -119,13 +146,13 @@ function sacarPokemon() {
 
     const hpStat = pokemon.stats.find((s) => s.stat && s.stat.name === "hp");
     let vida = hpStat ? hpStat.base_stat : 100;
-   
+
     slider.max = vida;
     slider.value = vida;
-    
+
     let vidaTexto = DOMFacade.get("vida");
- 
+
     vidaTexto.textContent = ` HP: ${slider.value} / ${vida}`;
-    sectionBattle.appendChild(vidaTexto);
+
   });
 }

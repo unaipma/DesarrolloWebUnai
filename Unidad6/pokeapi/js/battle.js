@@ -1,4 +1,5 @@
 import { DOMFacade } from "./DomFacade.js";
+import { Fight } from "./fight-model.js";
 const URI = "https://pokeapi.co/api/v2/pokemon/";
 const sectionBattle = DOMFacade.get("battlesec");
 const btnEscapar = DOMFacade.get("btnescapar");
@@ -67,29 +68,62 @@ btnAtacar.addEventListener("click", () => {
 });
 
 function guardarEnHistorial() {
-
-
-  fetch('http://localhost:3000/pokemon', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id: currentPokemon.id,
-      foto: currentPokemon.sprites.front_default,
-      nombre: currentPokemon.name,
-      shinny: DOMFacade.get("pokemonimg").dataset.shiny === "true",
-      nivel: Math.floor(Math.random() * 100) + 1
-    })
-  })
+  fetch('http://localhost:3000/pokemon/' + currentPokemon.id)
     .then(response => {
-      if (!response.ok) {
-        throw new Error("Error al guardar el Pokémon");
+      if (response.ok) {
+
+        return response.json().then(pokemon => {
+          const nuevoNivel = pokemon.nivel + 1;
+          const pokemonActualizado = {
+            id: pokemon.id,
+            foto: pokemon.foto,
+            shinny: pokemon.shinny,
+
+            nombre: pokemon.nombre,
+            nivel: nuevoNivel
+          };
+
+          fetch('http://localhost:3000/pokemon/' + currentPokemon.id, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(pokemonActualizado)
+          }).then(resp => {
+            if (resp.ok) {
+              console.log("Nivel del Pokémon actualizado a " + nuevoNivel);
+            }
+          });
+        });
+      } else if (response.status === 404) {
+
+        const nuevoPokemon = {
+          id: currentPokemon.id,
+          foto: currentPokemon.sprites.front_default,
+          nombre: currentPokemon.name,
+          shinny: DOMFacade.get("pokemonimg").dataset.shiny === "true",
+          nivel: 1
+        };
+
+        fetch('http://localhost:3000/pokemon', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(nuevoPokemon)
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Error al guardar el Pokémon");
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log("Pokémon guardado:", data);
+          });
+      } else {
+        throw new Error("Error verificando historial: " + response.status);
       }
-      return response.json();
-    })
-    .then(data => {
-      console.log("Pokémon guardado:", data);
     })
     .catch(error => {
       console.error(error);
@@ -154,5 +188,39 @@ function sacarPokemon() {
 
     vidaTexto.textContent = ` HP: ${slider.value} / ${vida}`;
 
+    guardarEnHistorial();
+
   });
+
+  function guardarEnHistorial() {
+    let ahora = new Date();
+    let fight = new Fight(
+      `${ahora.getDate()}/${ahora.getMonth() + 1}/${ahora.getFullYear()} 
+${ahora.getHours()}:${ahora.getMinutes()}`,
+      null,
+      currentPokemon.name,
+      "luchando",
+      "luchando",
+      DOMFacade.get("pokemonimg").src,
+      "luchando",
+      DOMFacade.get("pokemonimg").dataset.shiny
+    );
+    fetch('http://localhost:3000/fight', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(fight)
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log("Combate guardado en historial");
+        } else {
+          console.error("Error guardando combate");
+        }
+      })
+      .catch(err => console.error(err));
+
+  }
+
 }

@@ -23,6 +23,24 @@ router.post('/', (req, res) => {
   res.status(201).json(pokemon);
 });
 
+router.get('/:id', (req, res) => {
+  let pokemon = pokemonescapturados.find(pokemon => pokemon.id == req.params.id);
+  if (pokemon) {
+    res.json(pokemon);
+  } else {
+    res.status(404).send();
+  }
+});
+
+router.put('/:id', (req, res) => {
+  let pokemon = pokemonescapturados.find(pokemon => pokemon.id == req.params.id);
+  if (pokemon) {
+    pokemon.nivel = req.body.nivel;
+    res.json(pokemon);
+  } else {
+    res.status(404).send();
+  }
+});
 
 
 

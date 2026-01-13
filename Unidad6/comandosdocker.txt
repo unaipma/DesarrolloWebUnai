@@ -1,0 +1,8 @@
+docker run -d --name mong-mulweb3  -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret  mongo
+ docker exec -it mong-mulweb3 /bin/bash
+mongosh --username mongoadmin-p
+mongosh
+use (la db que queremos usar);
+db.(tabla).insertOne({nombre:"Orangutan"});
+docker run -d -p 27017:27017 --name mong-mulweb3(nombre contenedor) -v (nombre volumen)mulweb3_mongodb:/data/db -e MONGO_INITDB_ROOT_USERNAME=mongoadmin -e MONGO_INITDB_ROOT_PASSWORD=secret  mongo
+ 

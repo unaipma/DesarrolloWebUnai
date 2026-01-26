@@ -5,5 +5,7 @@
     </form>
 </section>
 <section class="results">
+    @for (housingLocation of housingLocationList; track $index) {
     <app-housinglocation [housingLocation]="housingLocation" />
+    }
 </section>

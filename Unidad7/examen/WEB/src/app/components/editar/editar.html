@@ -1,0 +1,17 @@
+<section class="form-container">
+    <h2>Edit Housing Location</h2>
+    <form [formGroup]="applyForm" (submit)="submitApplication()">
+        <label>Name: <input type="text" formControlName="name" /></label>
+        <label>City: <input type="text" formControlName="city" /></label>
+        <label>State: <input type="text" formControlName="state" /></label>
+        <label>Photo URL: <input type="text" formControlName="photo" /></label>
+        <label>Available Units: <input type="number" formControlName="availableUnits" /></label>
+        <label class="checkbox-label">
+            Wifi: <input type="checkbox" formControlName="wifi" />
+        </label>
+        <label class="checkbox-label">
+            Laundry: <input type="checkbox" formControlName="laundry" />
+        </label>
+        <button type="submit" class="primary">Save Changes</button>
+    </form>
+</section>

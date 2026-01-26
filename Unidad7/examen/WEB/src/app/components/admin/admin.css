@@ -1,0 +1,42 @@
+.admin-container {
+    padding: 20px;
+}
+
+.housing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.housing-table th,
+.housing-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.housing-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.housing-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.housing-table tr:hover {
+    background-color: #e6f7ff;
+}
+
+.edit-btn {
+    text-decoration: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.edit-btn:hover {
+    transform: scale(1.2);
+}

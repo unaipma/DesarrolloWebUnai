@@ -1,0 +1,16 @@
+<div class="container">
+  <section>
+    <form>
+      <input type="text" placeholder="Filter by city" #valueInput (keyup)="filterResults(valueInput.value)" />
+    </form>
+  </section>
+  <section>
+    <button routerLink="/admin">Admin</button>
+
+  </section>
+</div>
+<section class="results">
+  @for (housingLocation of filteredLocationList; track $index) {
+  <app-housing-location [housingLocation]="housingLocation" />
+  }
+</section>

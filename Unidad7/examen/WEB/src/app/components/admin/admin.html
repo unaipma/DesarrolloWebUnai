@@ -1,0 +1,29 @@
+<section class="admin-container">
+    <h2>Admin Panel - Housing Locations</h2>
+    <table class="housing-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (house of housingLocationList; track house.id) {
+            <tr>
+                <td>{{ house.id }}</td>
+                <td>{{ house.name }}</td>
+                <td>{{ house.city }}</td>
+                <td>{{ house.state }}</td>
+                <td>
+                    <a [routerLink]="['/edit', house.id]" class="edit-btn" title="Edit">
+                        ✏️
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

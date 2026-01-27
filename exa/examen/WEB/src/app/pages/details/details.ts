@@ -4,9 +4,11 @@ import { ActivatedRoute } from "@angular/router";
 import { HousingLocationInfo } from "src/app/interfaces/housinglocation";
 import { HousingService } from "src/app/service/housing-service";
 
+import { SortedHousingComponent } from "../../components/sorted-housing/sorted-housing";
+
 @Component({
   selector: "app-details",
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, SortedHousingComponent],
   templateUrl: "details.html",
   styleUrl: `details.css`,
 })
@@ -29,5 +31,5 @@ export class Details {
         this.changeDetectorRef.markForCheck();
       });
   }
-  submitApplication() {}
+  submitApplication() { }
 }

@@ -1,0 +1,8 @@
+<div class="sorted-container">
+    <h2>Viviendas por Disponibilidad (Mayor a Menor)</h2>
+    <section class="results">
+        @for (housingLocation of housingLocationList; track housingLocation.id) {
+        <app-housing-location [housingLocation]="housingLocation"></app-housing-location>
+        }
+    </section>
+</div>

@@ -49,4 +49,9 @@ export class HousingService {
     const response = await fetch(request);
     return (await response.json()) ?? {};
   }
+  async deleteHousingLocation(id: number): Promise<void> {
+    await fetch(`${this.url}/${id}`, {
+      method: "DELETE",
+    });
+  }
 }

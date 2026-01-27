@@ -6,4 +6,7 @@
     {{ housingLocation().city }}, {{ housingLocation().state }}
   </p>
   <a [routerLink]="['/details', housingLocation().id]">Learn More</a>
+  @if (authService.isAdmin()) {
+  <button class="primary" (click)="deleteLocation(housingLocation().id, $event)">Borrar</button>
+  }
 </section>
